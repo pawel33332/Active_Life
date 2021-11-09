@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            
              mc:Ignorable="d"
-             x:Class="Active_Life.Kompas">
+             x:Class="Active_Life.Kompas" >
+
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Kompas w budowie"
@@ -12,4 +14,5 @@
                 HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black" />
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>
