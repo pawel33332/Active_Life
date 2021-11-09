@@ -11,6 +11,7 @@
             <Label Text="Tryb ciemny w budowie"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
