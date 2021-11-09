@@ -16,7 +16,6 @@ namespace Active_Life
         {
             InitializeComponent();       
         }
-
        async  private void Trasa_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Trasa());
