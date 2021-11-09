@@ -11,7 +11,6 @@
             <Button Text="Trasa" HorizontalOptions="Center" VerticalOptions="Center"  Clicked="Trasa_Clicked"/>
             <Button Text="Kompas" HorizontalOptions="Center" VerticalOptions="Center"  Clicked="Kompas_Clicked"/>
             <Button Text="Tryb ciemny" HorizontalOptions="Center" VerticalOptions="Center"  Clicked="Tryb_Clicked"/>
-    
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
