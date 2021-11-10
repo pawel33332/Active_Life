@@ -19,7 +19,7 @@
              
              
                />
-               
+
         <Image HorizontalOptions="Center"
                VerticalOptions="Center"
                Source="pointer.png"
@@ -28,7 +28,6 @@
                x:Name="photoCompass"
              
                />
-
         <Label 
            
            x:Name="Compass_info"
