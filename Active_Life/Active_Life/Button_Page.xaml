@@ -6,11 +6,46 @@
              mc:Ignorable="d"
              x:Class="Active_Life.Button_Page"
              >
-    <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <Button Text="Trasa" HorizontalOptions="Center" VerticalOptions="Center"  Clicked="Trasa_Clicked"/>
-            <Button Text="Kompas" HorizontalOptions="Center" VerticalOptions="Center"  Clicked="Kompas_Clicked"/>
-            <Button Text="Tryb ciemny" HorizontalOptions="Center" VerticalOptions="Center"  Clicked="Tryb_Clicked"/>
-        </StackLayout>
-    </ContentPage.Content>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Image Grid.Row="0" Grid.Column="1"  Source="logo.png" Scale="2" />
+
+        <Image Grid.Row="1" Source="button_trasa.png">
+            
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                Tapped="Trasa_Clicked"
+                NumberOfTapsRequired="1" />
+            </Image.GestureRecognizers>
+        </Image>
+        
+        
+        
+        <Image Grid.Row="2" Source="button_kompas.png">
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                Tapped="Kompas_Clicked"
+                NumberOfTapsRequired="1" />
+            </Image.GestureRecognizers>
+        </Image>
+        <Label x:Name="data_godzina" Grid.Row="1" Grid.Column="2" Text="Data i godzina:" FontSize="25"  />
+        <Label x:Name="liczba_krokow" Grid.Row="2" Grid.Column="2" Text="Liczba kroków: " FontSize="25"  />
+        <Label  x:Name="tryb_ciemny" Grid.Row="3" Grid.Column="2"  FontSize="25" BackgroundColor="black"   />
+
+    </Grid>
+
 </ContentPage>

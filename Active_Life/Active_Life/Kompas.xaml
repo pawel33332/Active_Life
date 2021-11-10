@@ -5,14 +5,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             
              mc:Ignorable="d"
-             x:Class="Active_Life.Kompas" >
+             x:Class="Active_Life.Kompas"
+             BackgroundColor="Blue"
+             >
+    <Grid>
+      
+      
+       
+        <Image HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               Scale="1.0"
+               Source="compass.png"
+             
+             
+               />
+               
+        <Image HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Source="pointer.png"
+               Margin="75"
+              
+               x:Name="photoCompass"
+             
+               />
 
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Kompas w budowie"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black" />
-        </StackLayout>
-    </ContentPage.Content>
+        <Label 
+           
+           x:Name="Compass_info"
+           VerticalOptions="Center" 
+           VerticalTextAlignment="Start"
+           Text="" TextColor="White" HorizontalTextAlignment="Center"  FontSize="25" Margin="0,-500,0,0"
+           
+        
+      />
 
+    </Grid>
+  
 </ContentPage>

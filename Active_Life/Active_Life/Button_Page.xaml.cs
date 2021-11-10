@@ -14,7 +14,9 @@ namespace Active_Life
     {
         public Button_Page()
         {
-            InitializeComponent();       
+            InitializeComponent();
+            DateTime dzien = DateTime.Today;
+            data_godzina.Text = dzien.ToString();
         }
        async  private void Trasa_Clicked(object sender, EventArgs e)
         {
