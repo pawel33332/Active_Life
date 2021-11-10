@@ -20,7 +20,6 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-
         <Image Grid.Row="0" Grid.Column="1"  Source="logo.png" Scale="2" />
 
         <Image Grid.Row="1" Source="button_trasa.png">
