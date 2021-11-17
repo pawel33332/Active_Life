@@ -6,6 +6,7 @@
             
              mc:Ignorable="d"
              x:Class="Active_Life.Kompas"
+             x:Name="Kompass"
              BackgroundColor="Blue"
              >
     <Grid>

@@ -15,6 +15,12 @@ namespace Active_Life
         public Trasa()
         {
             InitializeComponent();
+            if (Active_Life.Button_Page.tryb_ciemny == 1)
+            {
+                Trasa_Page.BackgroundColor = Color.Black;
+                Trasa_Page.BackgroundColor = Color.Black;
+                napis.BackgroundColor = Color.White;
+            }
         }
     }
 }

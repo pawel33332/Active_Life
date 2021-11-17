@@ -5,6 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Active_Life.Button_Page"
+             x:Name="Button_Pagee"
+             BackgroundColor="White"
              >
 
     <Grid>
@@ -20,9 +22,9 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Row="0" Grid.Column="1"  Source="logo.png" Scale="2" />
+        <Image x:Name="logo" Grid.Row="0" Grid.Column="1"  Source="logo.png" Scale="2" />
 
-        <Image Grid.Row="1" Source="button_trasa.png">
+        <Image x:Name="button_trasa" Grid.Row="1" Source="button_trasa.png">
             
             <Image.GestureRecognizers>
                 <TapGestureRecognizer
@@ -30,10 +32,10 @@
                 NumberOfTapsRequired="1" />
             </Image.GestureRecognizers>
         </Image>
-        
-        
-        
-        <Image Grid.Row="2" Source="button_kompas.png">
+
+
+
+        <Image x:Name="button_kompas" Grid.Row="2" Source="button_kompas.png">
 
             <Image.GestureRecognizers>
                 <TapGestureRecognizer
@@ -43,7 +45,7 @@
         </Image>
         <Label x:Name="data_godzina" Grid.Row="1" Grid.Column="2" Text="Data i godzina:" FontSize="25"  />
         <Label x:Name="liczba_krokow" Grid.Row="2" Grid.Column="2" Text="Liczba kroków: " FontSize="25"  />
-        <Label  x:Name="tryb_ciemny" Grid.Row="3" Grid.Column="2"  FontSize="25" BackgroundColor="black"   />
+        <Button x:Name="button_tryb" Grid.Row="3" Grid.Column="2"  FontSize="25" BackgroundColor="black"  Clicked="Tryb_Clicked" Text="Włącz tryb ciemny" TextColor="White" />
 
     </Grid>
 
