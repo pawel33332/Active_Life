@@ -15,6 +15,7 @@ namespace Active_Life
         public Trasa()
         {
             InitializeComponent();
+            Trasa_Page.BackgroundColor = Active_Life.Button_Page.tlo_trasy;
         }
     }
 }

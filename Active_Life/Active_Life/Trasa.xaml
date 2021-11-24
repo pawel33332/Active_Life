@@ -4,12 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Active_Life.Trasa">
+             x:Class="Active_Life.Trasa"
+             x:Name="Trasa_Page">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Trasa w budowie"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black" />
+                HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"
+                 x:Name="napis"
+                   />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

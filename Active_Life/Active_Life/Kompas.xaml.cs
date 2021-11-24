@@ -13,9 +13,15 @@ namespace Active_Life
     public partial class Kompas : ContentPage
     {
         SensorSpeed _sensorSpeed = SensorSpeed.UI;// Ustawienie opóźnienie prędkości dla zmian monitorowania
+
+        
         public Kompas()
         {
+           
             InitializeComponent();
+            
+            Kompass.BackgroundColor = Active_Life.Button_Page.tlo_kompasu;
+            
             Compass.ReadingChanged += Compass_ReadingChanged; //odczyt czujnika
          
         }

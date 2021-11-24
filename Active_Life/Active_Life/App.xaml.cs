@@ -6,11 +6,13 @@ namespace Active_Life
 {
     public partial class App : Application
     {
+        
         public App()
         {
             InitializeComponent();
-
+            
             MainPage = new NavigationPage(new Button_Page());
+            
         }
 
         protected override void OnStart()
