@@ -26,7 +26,7 @@ namespace Active_Life
             DateTime dzien = DateTime.Now;
             data_godzina.Text = dzien.ToString("yyyy-MM-dd hh:mm");
         }
-       async  private void Trasa_Clicked(object sender, EventArgs e)
+        async private void Trasa_Clicked(object sender, EventArgs e)
         {
    
         await Navigation.PushAsync(new Trasa());
