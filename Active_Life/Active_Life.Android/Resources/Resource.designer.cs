@@ -5826,6 +5826,7 @@ namespace Active_Life.Droid
 		
 		public partial class Id
 		{
+			
 			// aapt resource value: 0x7F080006
 			public const int action0 = 2131230726;
 			

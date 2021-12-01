@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.IO;
+using Xamarin.Essentials;
 
 
 namespace Active_Life
 {
-    
     [XamlCompilation(XamlCompilationOptions.Compile)]
     
     public partial class Button_Page : ContentPage
     {
         
-        public static int tryb_ciemny = 0;
+        SensorSpeed speed = SensorSpeed.Default; //ustawienie opóźnienie prędkości dla zmian monitorowania
+        public static int tryb_ciemny = Preferences.Get("trybciemny", 0); //pobranie wartosci podczas uruchamiania
+        public static int licznik_krokow = Preferences.Get("licznikkrokow", 0);
+        public double pomiar_wczesniejszy= 0;
         public static Color tlo_kompasu = Color.Blue;
         public static Color tlo_trasy = Color.White;
         public Button_Page()
@@ -25,7 +29,32 @@ namespace Active_Life
             InitializeComponent();
             DateTime dzien = DateTime.Now;
             data_godzina.Text = dzien.ToString("yyyy-MM-dd hh:mm");
+            Tryb_Clicked(null, EventArgs.Empty);
+            Accelerometer.Start(speed);
+            Accelerometer.ReadingChanged += licz_kroki; //czytanie zmian
+
         }
+        private async void licz_kroki(object sender, AccelerometerChangedEventArgs e)
+        {
+            
+            float x_acceleration= e.Reading.Acceleration.X; //wczytywanie
+            float y_acceleration= e.Reading.Acceleration.Y;
+            float z_acceleration =e.Reading.Acceleration.Z;
+            
+            double pomiar=Math.Sqrt((x_acceleration * x_acceleration) + (y_acceleration * y_acceleration) + (z_acceleration * z_acceleration)); //algorytm pomiaru przesuniecia
+            double roznica= pomiar - pomiar_wczesniejszy;//algorytm pomiaru przesuniecia
+            pomiar_wczesniejszy = pomiar;
+            if (roznica > 0.2 && roznica<0.4) //jezeli roznica przesuniecie miesci sie w ustalonym przedziale 
+            {
+                licznik_krokow+=1; //dodajemy krok
+                Preferences.Set("licznikkrokow", licznik_krokow); //przechowywanie wartosci
+            }
+
+            
+            liczba_krokow.Text = "Licznik kroków: " + licznik_krokow.ToString(); //wypisanie wartosci
+      
+        }
+       
         async private void Trasa_Clicked(object sender, EventArgs e)
         {
    
@@ -61,18 +90,22 @@ namespace Active_Life
         }
         void Tryb_Clicked(object sender, EventArgs e)
         {
-            tryb_ciemny++;
-            if(tryb_ciemny==1) //wlaczenie trybu ciemnego
+            
+            
+            if (tryb_ciemny==1) //wlaczenie trybu ciemnego
             {
+            Preferences.Set("trybciemny", tryb_ciemny);
             trybciemny();
             button_tryb.Text = "tryb ciemny";
             } else if(tryb_ciemny==2) //wlaczenie trybu jasnego
             {
+                Preferences.Set("trybciemny", tryb_ciemny);
                 trybjasny();
                 button_tryb.Text = "tryb jasny";
 
             } else if(tryb_ciemny==3) //wlaczenie trybu automatycznego
             {
+                Preferences.Set("trybciemny", tryb_ciemny);
                 button_tryb.BackgroundColor = Color.Gray;
                 button_tryb.Text = "auto tryb";
                 DateTime dzien = DateTime.Now;
@@ -204,11 +237,12 @@ namespace Active_Life
 
             } else
             {
-                tryb_ciemny = 0;
+                tryb_ciemny =0;
+                Preferences.Set("trybciemny", tryb_ciemny);
             }
-          
+            tryb_ciemny++;
 
-            
+
         }
     }
 }
