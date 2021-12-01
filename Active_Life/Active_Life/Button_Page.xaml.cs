@@ -52,7 +52,7 @@ namespace Active_Life
 
         private async void licz_kroki(object sender, AccelerometerChangedEventArgs e)
         {
-            
+            data_i_godzina();
             float x_acceleration= e.Reading.Acceleration.X; //wczytywanie
             float y_acceleration= e.Reading.Acceleration.Y;
             float z_acceleration =e.Reading.Acceleration.Z;
