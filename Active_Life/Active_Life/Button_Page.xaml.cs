@@ -27,13 +27,29 @@ namespace Active_Life
         {
          
             InitializeComponent();
-            DateTime dzien = DateTime.Now;
-            data_godzina.Text = dzien.ToString("yyyy-MM-dd hh:mm");
+            data_i_godzina();
             Tryb_Clicked(null, EventArgs.Empty);
             Accelerometer.Start(speed);
             Accelerometer.ReadingChanged += licz_kroki; //czytanie zmian
 
         }
+
+        public void data_i_godzina()
+        {
+
+            DataTime dzien = DateTime.Now;
+            int a = Preferences.Get("dzien", dzien.Day); //pobranie ostatniego znanego dnia
+            int day = dzien.Day; //aktualny dzien
+            if( a!= day)//jezeli aktualny dzien nie jest tym samym co ostatni znany
+            {
+                licznik_krokow = 0;//licznik krokow zerowy
+                Preferences.Set("licznikkrokow", licznik_krokow);
+                Preferences.Set("dzien", day);
+            }
+            data_godzina.Text = dzien.ToString("yyyy-MM-dd hh:mm");
+
+        }
+
         private async void licz_kroki(object sender, AccelerometerChangedEventArgs e)
         {
             
