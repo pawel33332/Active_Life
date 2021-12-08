@@ -3,16 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              x:Class="Active_Life.Trasa"
              x:Name="Trasa_Page">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Trasa w budowie"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"
-                 x:Name="napis"
-                   />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <maps:Map x:Name="map" Grid.Row="0" Grid.ColumnSpan="3" IsShowingUser="True"/>
+        <Image Grid.Row="1" Grid.Column="0" Source="button_poczatek_ciemny.png">
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                Tapped="Sledz_trase"
+                NumberOfTapsRequired="1" />
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Grid.Row="1" Grid.Column="1" Source="button_koniec_ciemny.png" >
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                Tapped="Sledz_trase"
+                NumberOfTapsRequired="1" />
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Grid.Row="1" Grid.Column="2" Source="button_statystyki_ciemny.png">
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                Tapped="Sledz_trase"
+                NumberOfTapsRequired="1" />
+            </Image.GestureRecognizers>
+        </Image>
+
+    </Grid>
 </ContentPage>
