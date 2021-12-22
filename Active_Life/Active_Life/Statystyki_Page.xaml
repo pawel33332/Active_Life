@@ -7,14 +7,17 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
   
         <maps:Map x:Name="maps" Grid.Row="0" Grid.ColumnSpan="3" />
-        <Label x:Name="inf" Grid.Row="1"  Text="Średnia prędkość:" FontSize="25" Grid.ColumnSpan="3" HorizontalOptions="Center" />
-        <Label x:Name="przebyta_droga" Grid.Row="2" Grid.Column="0" Text="Przebyta droga:" FontSize="25" HorizontalOptions="Center" />
-        <Label x:Name="srednia_predkosc" Grid.Row="2" Grid.Column="2" Text="Średnia prędkość:" FontSize="25" HorizontalOptions="Center" />
+        <Label x:Name="inf" Grid.Row="1"  Text="" FontSize="20" Grid.ColumnSpan="3" HorizontalOptions="Center" />
+        <Label x:Name="data" Grid.Row="2" Grid.Column="0" Text="Data trasy: " FontSize="20" HorizontalOptions="Center" />
+        <Label x:Name="czas_trasy" Grid.Row="2" Grid.Column="2" Text="Czas trasy: :" FontSize="20" HorizontalOptions="Center" />
+        <Label x:Name="przebyta_droga" Grid.Row="3" Grid.Column="0" Text="Przebyta droga: " FontSize="20" HorizontalOptions="Center" />
+        <Label x:Name="srednia_predkosc" Grid.Row="3" Grid.Column="2" Text="Średnia prędkość: " FontSize="20" HorizontalOptions="Center" />
     </Grid>
 </ContentPage>

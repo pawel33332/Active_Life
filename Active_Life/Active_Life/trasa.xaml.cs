@@ -21,6 +21,8 @@ namespace Active_Life
         string trasa_file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "path.txt");
         string trasa_file_stat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path.txt");
         string wartosc;
+        DateTime data_start;
+        DateTime data_koniec;
         double[] tab_pozycja = new double[1000];
      
 
@@ -29,7 +31,7 @@ namespace Active_Life
             InitializeComponent();
             Trasa_Page.BackgroundColor = Active_Life.Button_Page.tlo_trasy;
             obecna_pozycja();
-            odczytaj_trase();
+            //odczytaj_trase();
 
         }
         async private void Wyswietl_statystyki(object sender, EventArgs e)
@@ -43,6 +45,8 @@ namespace Active_Life
             var location = await Geolocation.GetLocationAsync(request);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude)
             , Distance.FromMiles(2)));
+             odczytaj_trase();
+            
         }
         async private void Sledz_trase(object sender, EventArgs e)
         {
@@ -50,6 +54,8 @@ namespace Active_Life
             if (a == 0)
             {
                 File.WriteAllText(trasa_file, String.Empty);
+                data_start = DateTime.Now;
+                await DisplayAlert("Informacja", "Rozpoczêto œledzenie trasy.", "OK");
                 sledzenie();
                 Preferences.Set("trasa_aktywna", 1);
             } else
@@ -65,17 +71,16 @@ namespace Active_Life
             var location = await Geolocation.GetLocationAsync(request);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude)
             , Distance.FromMiles(2)));
-
+           
             using (StreamWriter sw = File.AppendText(trasa_file))
             {
                 sw.WriteLine(location.Latitude);
                 sw.WriteLine(location.Longitude);
 
             }
-            using (StreamReader sr = new StreamReader(trasa_file))
+           using (StreamReader sr = new StreamReader(trasa_file))
             {
 
-                int i = 0;
                 while ((wartosc = sr.ReadLine()) == null)
                 {
                     tab_pozycja[0] = location.Latitude;
@@ -90,12 +95,17 @@ namespace Active_Life
                 }
 
             }
+            
             odczytaj_trase();
         }
          async private void odczytaj_trase()
         {
+            if (!File.Exists(trasa_file))
+            {
+                return;
+            }
 
-            Polyline polyline = new Polyline
+                Polyline polyline = new Polyline
             {
                 StrokeWidth = 20,
                 StrokeColor = Color.FromHex("#dd9ecd"),
@@ -147,11 +157,15 @@ namespace Active_Life
         {
             if(Preferences.Get("trasa_aktywna",0)==1)
             {
+            data_koniec = DateTime.Now;
+            var czas = (data_koniec - data_start).Minutes;
             using (var reader = new StreamReader(trasa_file))
             using (var writer = new StreamWriter(trasa_file_stat))
             {
                 writer.Write(reader.ReadToEnd());
-            }
+                writer.Write(czas);
+          
+                }
             Preferences.Set("trasa_aktywna", 0);
             File.WriteAllText(trasa_file, "");
             await Navigation.PushAsync(new Trasa());
