@@ -19,7 +19,11 @@ namespace Active_Life
     {
         
         string trasa_file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "path.txt");
-        string trasa_file_stat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path.txt");
+        string trasa_file_stat1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path.txt");
+        string trasa_file_stat2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path2.txt");
+        string trasa_file_stat3 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path3.txt");
+        string trasa_file_stat4 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path4.txt");
+        string trasa_file_stat5 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "last_path5.txt");
         string wartosc;
         DateTime data_start;
         DateTime data_koniec;
@@ -147,7 +151,7 @@ namespace Active_Life
             map.MapElements.Add(polyline);
             if(Preferences.Get("trasa_aktywna", 0) == 1)
             {
-            await Task.Delay(30000);
+            await Task.Delay(2000);
             sledzenie();
             }
             
@@ -159,13 +163,58 @@ namespace Active_Life
             {
             data_koniec = DateTime.Now;
             var czas = (data_koniec - data_start).Minutes;
-            using (var reader = new StreamReader(trasa_file))
-            using (var writer = new StreamWriter(trasa_file_stat))
-            {
-                writer.Write(reader.ReadToEnd());
-                writer.Write(czas);
           
+            if (File.Exists(trasa_file_stat4))
+                {
+                    using (var reader = new StreamReader(trasa_file_stat4))
+                    using (var writer = new StreamWriter(trasa_file_stat5))
+                    {
+
+                        writer.Write(reader.ReadToEnd());
+
+                    }
+            }
+          if (File.Exists(trasa_file_stat3))
+                {
+                    using (var reader = new StreamReader(trasa_file_stat3))
+                    using (var writer = new StreamWriter(trasa_file_stat4))
+                    {
+
+                        writer.Write(reader.ReadToEnd());
+
+                    }
                 }
+           if (File.Exists(trasa_file_stat2))
+                {
+                    using (var reader = new StreamReader(trasa_file_stat2))
+                    using (var writer = new StreamWriter(trasa_file_stat3))
+                    {
+
+                        writer.Write(reader.ReadToEnd());
+
+                    }
+                }
+            if (File.Exists(trasa_file_stat1))
+                {
+                    using (var reader = new StreamReader(trasa_file_stat1))
+                    using (var writer = new StreamWriter(trasa_file_stat2))
+                    {
+
+                        writer.Write(reader.ReadToEnd());
+
+                    }
+                }
+                    using (var reader = new StreamReader(trasa_file))
+                    using (var writer = new StreamWriter(trasa_file_stat1))
+                    {
+                     writer.Write(reader.ReadToEnd());
+                     writer.Write(data_start.ToString("yyyy")+data_start.ToString("MM")+data_start.ToString("dd"));
+                     writer.WriteLine();
+                     writer.Write(czas);
+                    
+                    }
+
+               
             Preferences.Set("trasa_aktywna", 0);
             File.WriteAllText(trasa_file, "");
             await Navigation.PushAsync(new Trasa());
