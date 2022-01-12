@@ -35,8 +35,7 @@ namespace Active_Life
             przebyta_droga.TextColor = Active_Life.Button_Page.text_color;
             srednia_predkosc.TextColor = Active_Life.Button_Page.text_color;
             czas_trasy.TextColor = Active_Life.Button_Page.text_color;
-            data.TextColor = Active_Life.Button_Page.text_color;
-            if (File.Exists(trasa_file_stat1))
+                  if (File.Exists(trasa_file_stat1))
             {
                 inf.Text = "Statystyki twojej ostatniej trasy";
                 odczytaj_trase(trasa_file_stat1);
@@ -49,6 +48,7 @@ namespace Active_Life
         }
         private void odczytaj_trase(string nr_trasy)
         {
+            dlugosc_trasy = 0;
             Polyline polyline = new Polyline
             {
                 StrokeWidth = 20,
@@ -83,7 +83,7 @@ namespace Active_Life
 
                     i++;
                 }
-                for (int a = 0; a < i - 2; a += 2)
+                for (int a = 0; a < i - 1; a += 2)
                 {
 
                     polyline.Geopath.Add(new Position(tab_pozycja[a], tab_pozycja[a + 1]));
@@ -99,20 +99,25 @@ namespace Active_Life
                     Location druga = new Location(b_lattitude, b_longtitude);
                     dlugosc_trasy += Location.CalculateDistance(pierwsza, druga, DistanceUnits.Kilometers);
                 }
+               // var value = tab_pozycja[i - 2].ToString();
+                //String rok= value.Substring(0,4);
+                //String miesiac = value.Substring(4, 2);
+              //  String dzien = value.Substring(6, 2);
+
                 var srednia_pr = dlugosc_trasy / (tab_pozycja[i - 1] / 60);
                 if (tab_pozycja[i - 1] < 1)
                 {
                     przebyta_droga.Text = "Przebyta droga: " + "zbyt krótka trasa";
                     srednia_predkosc.Text = "Średnia prędkość: " + "zbyt krótka trasa";
                     czas_trasy.Text = "Czas trasy: " + tab_pozycja[i - 1] + " minuty";
-                    data.Text = "Data trasy: " + tab_pozycja[i - 2];
+                    //data.Text = "Data trasy: " + rok+"/"+miesiac+"/"+dzien;
                 }
                 else
                 {
                     przebyta_droga.Text = "Przebyta droga: " + Math.Round(dlugosc_trasy, 2).ToString() + " km";
                     srednia_predkosc.Text = "Średnia prędkość: " + Math.Round(srednia_pr, 2).ToString() + " km/h";
                     czas_trasy.Text = "Czas trasy: " + tab_pozycja[i - 1] + " minuty";
-                    data.Text = "Data trasy: " + tab_pozycja[i - 2];
+                   // data.Text = "Data trasy: " + rok + "/" + miesiac + "/" + dzien;
                 }
             }
 
@@ -137,12 +142,22 @@ namespace Active_Life
                             inf.Text = "Statystyki twojej czwartej trasy";
                             odczytaj_trase(trasa_file_stat4);
                         }
-                        
+                        else
+                        {
+                            inf.Text = "Nie masz zapisanej czwartej trasy";
+                            nr_trasy--;
+                        }
+
                     } else if(nr_trasy == 3) {
                         if (File.Exists(trasa_file_stat4))
                         {
                             inf.Text = "Statystyki twojej trzeciej trasy";
                             odczytaj_trase(trasa_file_stat3);
+                        }
+                        else
+                        {
+                            inf.Text = "Nie masz zapisanej trzeciej trasy";
+                            nr_trasy--;
                         }
                     }
                     else if (nr_trasy == 2)
@@ -151,6 +166,11 @@ namespace Active_Life
                         {
                             inf.Text = "Statystyki twojej drugiej trasy";
                             odczytaj_trase(trasa_file_stat2);
+                        }
+                        else
+                        {
+                            inf.Text = "Nie masz zapisanej drugiej trasy";
+                            nr_trasy--;
                         }
                     }
                     else if (nr_trasy == 1)
@@ -178,33 +198,52 @@ namespace Active_Life
                             inf.Text = "Statystyki twojej drugiej trasy";
                             odczytaj_trase(trasa_file_stat2);
                         }
+                        else
+                        {
+                            inf.Text = "Nie masz zapisanej drugiej trasy";
+                            nr_trasy--;
+                        }
 
                     }
-                    else if (nr_trasy == 3)
+                    if (nr_trasy == 3)
                     {
                         if (File.Exists(trasa_file_stat3))
                         {
                             inf.Text = "Statystyki twojej trzeciej trasy";
                             odczytaj_trase(trasa_file_stat3);
                         }
+                        else
+                        {
+                            inf.Text = "Nie masz zapisanej trzeciej trasy";
+                            nr_trasy--;
+                        }
                     }
-                    else if (nr_trasy == 4)
+                    if (nr_trasy == 4)
                     {
                         if (File.Exists(trasa_file_stat4))
                         {
                             inf.Text = "Statystyki twojej czwartej trasy";
                             odczytaj_trase(trasa_file_stat4);
                         }
+                        else
+                        {
+                            inf.Text = "Nie masz zapisanej czwartej trasy";
+                            nr_trasy--;
+                        }
                     }
-                    else if (nr_trasy == 5)
+                    if (nr_trasy == 5)
                     {
                         if (File.Exists(trasa_file_stat5))
                         {
                             inf.Text = "Statystyki twojej piątej trasy";
                             odczytaj_trase(trasa_file_stat5);
+                        } else
+                        {
+                            inf.Text = "Nie masz zapisanej piatej trasy";
+                            nr_trasy--;
                         }
                     }
-                    else if (nr_trasy > 5)
+                    if (nr_trasy > 5)
                     {
                         inf.Text = "Statystyki twojej piątej trasy";
                         odczytaj_trase(trasa_file_stat5);

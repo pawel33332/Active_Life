@@ -45,6 +45,7 @@ namespace Active_Life
         }
         async private void obecna_pozycja()
         {
+            
             var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(2));
             var location = await Geolocation.GetLocationAsync(request);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude)
@@ -151,7 +152,7 @@ namespace Active_Life
             map.MapElements.Add(polyline);
             if(Preferences.Get("trasa_aktywna", 0) == 1)
             {
-            await Task.Delay(2000);
+            await Task.Delay(10000);
             sledzenie();
             }
             
@@ -166,50 +167,56 @@ namespace Active_Life
           
             if (File.Exists(trasa_file_stat4))
                 {
+                    File.WriteAllText(trasa_file_stat5, "");
                     using (var reader = new StreamReader(trasa_file_stat4))
                     using (var writer = new StreamWriter(trasa_file_stat5))
                     {
-
+                      
                         writer.Write(reader.ReadToEnd());
 
                     }
             }
           if (File.Exists(trasa_file_stat3))
                 {
+                    File.WriteAllText(trasa_file_stat4, "");
                     using (var reader = new StreamReader(trasa_file_stat3))
                     using (var writer = new StreamWriter(trasa_file_stat4))
                     {
-
+                        
                         writer.Write(reader.ReadToEnd());
 
                     }
                 }
            if (File.Exists(trasa_file_stat2))
                 {
+                    File.WriteAllText(trasa_file_stat3, "");
                     using (var reader = new StreamReader(trasa_file_stat2))
                     using (var writer = new StreamWriter(trasa_file_stat3))
                     {
-
+                        
                         writer.Write(reader.ReadToEnd());
 
                     }
                 }
             if (File.Exists(trasa_file_stat1))
                 {
+                    File.WriteAllText(trasa_file_stat2, "");
                     using (var reader = new StreamReader(trasa_file_stat1))
                     using (var writer = new StreamWriter(trasa_file_stat2))
                     {
-
+                        
                         writer.Write(reader.ReadToEnd());
 
                     }
                 }
+               File.WriteAllText(trasa_file_stat1, "");
                     using (var reader = new StreamReader(trasa_file))
                     using (var writer = new StreamWriter(trasa_file_stat1))
                     {
-                     writer.Write(reader.ReadToEnd());
-                     writer.Write(data_start.ToString("yyyy")+data_start.ToString("MM")+data_start.ToString("dd"));
-                     writer.WriteLine();
+                    
+                    writer.Write(reader.ReadToEnd());
+                    // writer.Write(data_start.ToString("yyyy")+data_start.ToString("MM")+data_start.ToString("DD"));
+                    // writer.WriteLine();
                      writer.Write(czas);
                     
                     }
